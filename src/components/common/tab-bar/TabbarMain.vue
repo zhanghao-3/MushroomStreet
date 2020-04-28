@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tabbarmain">
     <tabbar>
       <tabbaritem path='/home' activeColor='deeppink'>
         <img slot="item-icon" src="../../../assets/img/tabbar/home.png" alt="">
@@ -41,5 +41,4 @@ export default {
 }
 </script>
 <style scoped>
-
 </style>

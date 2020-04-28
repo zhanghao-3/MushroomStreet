@@ -20,6 +20,15 @@ export default {
     width: 100%;
     height: 49px;
     display: flex;
+    position: sticky;
+    top:0;
+    left: 0;
+    flex: 1;
+    z-index: 10;
+    background-color: hotpink;
+    line-height: 49px;
+    color: #fff;
+    text-align: center;
   }
   .nav-bar .left,.right{
     width: 60px;
