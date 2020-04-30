@@ -25,6 +25,7 @@ export default {
   methods: {
     activeClick(index){
       this.currentIndex = index
+      this.$emit('tabclick',index)
     }
   },
 };
@@ -36,11 +37,12 @@ export default {
     height: 50px;
     display: flex;
     text-align: center;
-    margin:20px 0;
+    /* margin:20px 0; */
     position: sticky;
     top:49px;
     left:0;
     background-color: #fff;
+    z-index: 10;
   }
   .tab-control-item{
     height: 50px;
