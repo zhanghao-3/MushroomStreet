@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <navbar>
+    <navbar class="nav-bar">
       <div slot="center">蘑菇街</div>
     </navbar>
     <TabControl :title='["流行","新款","精选"]' @tabclick='tabClick' v-show='isTabFixed' ref='tabFixed'></TabControl>
@@ -120,6 +120,10 @@ export default {
     height: 100vh;
     position: relative;
     /* padding-bottom: 100px; */
+  }
+  .nav-bar{
+    background-color: hotpink;
+    color: #fff;
   }
   /* .better-scroll{      */
     /* position: relative; */

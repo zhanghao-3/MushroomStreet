@@ -1,6 +1,6 @@
 <template>
-  <div class="goodslistitem">
-    <a :href="goodsitem.link"><img :src="goodsitem.show.img" alt=""></a>
+  <div class="goodslistitem" @click='itemClick'>
+    <img :src="goodsitem.show.img" alt="">
     <div class="goods-info">
       <p>{{goodsitem.title}}</p>
       <span class="price">￥{{goodsitem.price}}</span>
@@ -28,6 +28,11 @@ export default {
     // imageload(){
     //   // this.$emit.
     // }
+    itemClick(){
+      console.log(this.goodsitem);
+      
+      this.$router.push('/detail/' + this.goodsitem.iid)
+    }
   },
 };
 </script>

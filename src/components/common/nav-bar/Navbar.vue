@@ -25,9 +25,7 @@ export default {
     left: 0;
     flex: 1;
     z-index: 10;
-    background-color: hotpink;
     line-height: 49px;
-    color: #fff;
     text-align: center;
   }
   .nav-bar .left,.right{
