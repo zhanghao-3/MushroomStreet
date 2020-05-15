@@ -38,9 +38,9 @@ export default {
     display: flex;
     text-align: center;
     /* margin:20px 0; */
-    position: sticky;
+    /* position: sticky;
     top:49px;
-    left:0;
+    left:0; */
     background-color: #fff;
     z-index: 10;
   }

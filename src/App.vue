@@ -20,5 +20,8 @@ export default {
 
 <style>
   @import './assets/css/base.css';
+  #app{
+    font-size: 16px;
+  }
   
 </style>

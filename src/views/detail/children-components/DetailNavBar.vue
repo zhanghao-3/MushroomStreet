@@ -1,6 +1,6 @@
 <template>
  <div>
-   <Navbar>
+   <Navbar class="nav-bar">
      <div slot="left" class="back-image" @click="backHome">
        <img src="../../../assets/img/common/back.svg" alt="">
      </div>
@@ -30,6 +30,7 @@ export default {
   methods: {
     itemClick(index){
       this.currentIndex = index
+      this.$emit('titleClick',index)
     },
     backHome(){
       this.$router.back()
@@ -39,6 +40,9 @@ export default {
 </script>
 
 <style scoped>
+.nav-bar{
+  background-color: #fff;
+}
   .title{
     display: flex;
   }

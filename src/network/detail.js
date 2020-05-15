@@ -6,6 +6,13 @@ export function getDetailData(iid){
   })
 }
 
+export function getRecommendData(){
+  return request({
+    url:'/data/detail/recommend.json'
+  })
+}
+
+
 export class GoodsInfo{
   constructor(columns,itemInfo,shopInfo){
     this.title = itemInfo.title
@@ -14,7 +21,17 @@ export class GoodsInfo{
     this.discount = itemInfo.discountDesc
     this.columns = columns
     this.services = shopInfo.services
+    this.desc = itemInfo.desc
+    this.highNowPrice = itemInfo.highNowPrice
 
+  }
+}
+
+export class GoodsParams{
+  constructor(info,rule){
+    this.img = info.images ? info.images[0] : '',
+    this.info = info.set,
+    this.size = rule.tables
   }
 }
 // let goodsinfo = new GoodsInfo()

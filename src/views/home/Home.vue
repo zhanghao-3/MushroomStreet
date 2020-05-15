@@ -3,12 +3,12 @@
     <navbar class="nav-bar">
       <div slot="center">蘑菇街</div>
     </navbar>
-    <TabControl :title='["流行","新款","精选"]' @tabclick='tabClick' v-show='isTabFixed' ref='tabFixed'></TabControl>
+    <TabControl :title='["流行","新款","精选"]' @tabclick='tabClick' v-show='isTabFixed' ref='tabFixed' class="tabcontrol"></TabControl>
     <BetterScroll :click='true' :pullupload='true' :probetype='3' class="better-scroll" @bsscroll='homeScroll' ref='scroll' @pullingUp='loadMore'>
       <home-swiper :banners="banners"></home-swiper>
       <HomeRecommend :recommend="recommend"></HomeRecommend>
       <Homepopular/>
-      <TabControl :title='["流行","新款","精选"]' @tabclick='tabClick' v-show='!isTabFixed' ref='tabContent'></TabControl>
+      <TabControl :title='["流行","新款","精选"]' @tabclick='tabClick' ref='tabContent'></TabControl>
       <GoodsList :goods='goods[currentType].list'></GoodsList>
     </BetterScroll>
     <BackTop v-if="isShowTop" @click.native='backTop'/>
@@ -21,8 +21,8 @@ import { request } from '../../network/request'
 import TabControl from '../../components/content/tabcontrol/TabControl'
 import GoodsList from '../../components/content/goods/GoodsList'
 import BetterScroll from '../../components/common/better-scroll/BetterScroll'
-import BackTop from '../../components/content/backtop/BackTop'
-
+// 返回顶部 组件  混入写法
+import { backTopMinxin} from '../../common/minxin'
 // home 子组件
 import HomeSwiper from './son-comp/HomeSwiper'
 import { getHomeMultidata,getHomeGoods } from '../../network/home'
@@ -41,10 +41,12 @@ export default {
         sell:{page:0,list:[]}
       },
       currentType:'pop',
-      isShowTop:false,
-      isTabFixed:false //用于代替 tabcontrol显示与隐藏
+      isTabFixed:false, //用于代替 tabcontrol显示与隐藏
+      saveY:0
     }
   },
+  // 返回顶部 混入写法
+  mixins:[backTopMinxin],
   components:{
     Navbar,
     HomeSwiper,
@@ -53,7 +55,6 @@ export default {
     TabControl,
     GoodsList,
     BetterScroll,
-    BackTop
   },
   created() {
     this.getHomeMultiData()
@@ -61,6 +62,21 @@ export default {
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
   },
+  mounted() {
+    this.$bus.$on('imageload',() => {
+      this.$refs.scroll.bs.refresh()
+    })
+  },
+  // 进入首页 跳转到离开时的位置 并重新刷新
+    activated () {
+    this.$refs.scroll.refresh()
+    this.$refs.scroll.bs.scrollTo(0,this.saveY,0)
+  },
+  // 离开首页 记录状态 和 位置
+  deactivated () {
+    this.saveY = this.$refs.scroll.getScrollY()
+  },
+
   methods: {
     // 网络请求相关方法
     getHomeMultiData(){
@@ -92,23 +108,15 @@ export default {
       this.$refs.tabFixed.currentIndex = index
       this.$refs.tabContent.currentIndex = index
     },
-    // imageLoad(){
-    //   this.$refs.scroll.bs.refresh()
-    // },
     homeScroll(position){
-      // console.log(position);
-      // if(position.y < -800){
-      //   this.isShowTop = true
-      // }else{
-      //   this.isShowTop = false
-      // }
-      this.isShowTop = position.y < -800
+      // 返回顶部 混入写法
+      this.getBackTopShow(position)
+
       this.isTabFixed = position.y < -610
     },
-    backTop(){
-      // console.log('.............');
-      this.$refs.scroll.bs.scrollTo(0,0,1500)
-    },
+    // backTop(){
+    //   this.$refs.scroll.bs.scrollTo(0,0,1500)
+    // },
     loadMore(){
       this.getHomeGoods(this.currentType)
     }
@@ -124,6 +132,10 @@ export default {
   .nav-bar{
     background-color: hotpink;
     color: #fff;
+  }
+  .tabcontrol{
+    position: fixed;
+
   }
   /* .better-scroll{      */
     /* position: relative; */

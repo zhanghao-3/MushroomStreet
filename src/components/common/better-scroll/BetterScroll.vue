@@ -59,6 +59,15 @@ export default {
   methods: {
     finishpullup(){
       this.bs.finishPullUp()
+    },
+     refresh(){
+      // console.log('------------');
+      this.bs && this.bs.refresh()
+    },
+    // 滚动的 y 距离
+    getScrollY(){
+      return this.bs ? this.bs.y : 0
+      
     }
   },
 };
@@ -66,12 +75,12 @@ export default {
 
 <style scoped>
   .wrapper{
-    position: absolute;
+    /* position: absolute;
     top:49px;
     bottom:50px;
     left: 0;
-    right:0;
-    /* height: calc(100% - 94px);  */
+    right:0; */
+    height: calc(100% - 94px); 
     overflow: hidden;
   }
 </style>
