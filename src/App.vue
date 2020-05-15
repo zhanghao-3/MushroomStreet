@@ -3,7 +3,6 @@
     <keep-alive exclude="Detail">
       <router-view></router-view>
     </keep-alive>
-    
     <tabbar-main></tabbar-main>
   </div>
 </template>

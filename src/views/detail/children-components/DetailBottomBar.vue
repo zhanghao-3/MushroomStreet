@@ -32,6 +32,7 @@ export default {
   methods: {
     addToCart(){
       this.$emit('addCart')
+      this.$bus.$emit('clickCart')
     }
   },
 };

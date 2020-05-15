@@ -33,6 +33,9 @@ export default {
       this.$router.push(this.path)
       // 这里应该是先打印 再 执行 push  所以打印的是上一次的页面路由
       console.log(this.$route);
+      if(this.$route.path == '/cart'){
+        this.$emit('thisRouter')
+      }
     }
   },
 }
